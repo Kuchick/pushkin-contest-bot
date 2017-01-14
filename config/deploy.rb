@@ -3,7 +3,7 @@ server '77.244.214.124', roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:Kuchick/pushkin-contest-bot.git'
 set :application,     'pushkin-contest-bot'
-set :user,            'deploy'
+set :user,            'deployer'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
