@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     level = params[:level]
     answer = $main_hash[question]
 
+
     send_answer(answer, task_id)
   end
 
