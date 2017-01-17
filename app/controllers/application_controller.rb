@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def quiz
     head :ok, content_type: 'text/html'
     question = question_params[:question]
-    task_id = question_params[:task_id]
+    task_id = question_params[:id]
     level = question_params[:level]
     answer = $main_hash[question]
 
