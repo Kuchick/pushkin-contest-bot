@@ -1,5 +1,3 @@
-require 'json'
-
 file = File.open("poems-full.json")
 content = file.read
 raw_hash = JSON.parse(content)
