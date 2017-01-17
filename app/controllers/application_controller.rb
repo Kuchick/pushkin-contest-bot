@@ -13,6 +13,9 @@ class ApplicationController < ActionController::Base
     answer = $main_hash[question]
 
     question.gsub!(',', ' ')
+    question.gsub!('?', ' ')
+    question.gsub!('!', ' ')
+    question.gsub!('-', ' ')
     question.gsub!('.', ' ')
     question.gsub!('  ', ' ')
     question.gsub!(/\A\p{Space}*/, '')
