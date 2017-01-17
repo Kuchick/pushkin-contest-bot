@@ -5,13 +5,17 @@ class ApplicationController < ActionController::Base
   end
 
   def quiz
-    question = params[:question]
-    task_id = params[:task_id]
-    level = params[:level]
+    question = question_params[:question]
+    task_id = question_params[:task_id]
+    level = question_params[:level]
     answer = $main_hash[question]
 
 
     send_answer(answer, task_id)
+  end
+
+  def question_params
+    params.permit(:question, :id, :level)
   end
 
   def send_answer(answer, task_id)
