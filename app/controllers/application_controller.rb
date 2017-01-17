@@ -24,10 +24,12 @@ class ApplicationController < ActionController::Base
     question.gsub!(/\A\p{Space}*/, '')
     question.strip!
     
-    Rails.logger.debug "!!!!!DEBUG: #{answer}"
+    
 
 
     answer = $main_hash[question]
+    Rails.logger.debug "!!!!!DEBUG: #{answer}"
+    
     send_answer(answer, task_id)
   end
 
