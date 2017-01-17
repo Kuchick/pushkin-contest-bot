@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
     question = question_params[:question]
     task_id = question_params[:id]
     level = question_params[:level]
-    answer = $main_hash[question]
 
     question.gsub!(';', ' ')
     question.gsub!(':', ' ')
@@ -25,10 +24,10 @@ class ApplicationController < ActionController::Base
     question.gsub!(/\A\p{Space}*/, '')
     question.strip!
     
-
-    Rails.logger.debug "!!!!!DEBUG: #{params}"
     Rails.logger.debug "!!!!!DEBUG: #{answer}"
 
+
+    answer = $main_hash[question]
     send_answer(answer, task_id)
   end
 
