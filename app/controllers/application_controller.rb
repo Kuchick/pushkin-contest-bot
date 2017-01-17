@@ -11,10 +11,12 @@ class ApplicationController < ActionController::Base
     task_id = question_params[:id]
     level = question_params[:level]
 
+    question.gsub!('«', ' ')
+    question.gsub!('»', ' ')
+    question.gsub!('—', ' ')
+
     question.gsub!(';', ' ')
     question.gsub!(':', ' ')
-    #question.gsub!('', ' ')
-
     question.gsub!(',', ' ')
     question.gsub!('?', ' ')
     question.gsub!('!', ' ')
@@ -29,7 +31,7 @@ class ApplicationController < ActionController::Base
 
     answer = $main_hash[question]
     Rails.logger.debug "!!!!!DEBUG: #{answer}"
-    
+
     send_answer(answer, task_id)
   end
 
