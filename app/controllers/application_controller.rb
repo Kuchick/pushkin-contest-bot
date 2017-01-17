@@ -6,14 +6,16 @@ class ApplicationController < ActionController::Base
   end
 
   def quiz
+    head :ok, content_type: 'text/html'
     question = question_params[:question]
     task_id = question_params[:task_id]
     level = question_params[:level]
     answer = $main_hash[question]
 
-    head :ok, content_type: 'text/html'
+    
 
-    Rails.logger.debug "DEBUG: #{answer}"
+    Rails.logger.debug "!!!!!DEBUG: #{params}"
+    Rails.logger.debug "!!!!!DEBUG: #{answer}"
 
     send_answer(answer, task_id)
   end
@@ -29,7 +31,9 @@ class ApplicationController < ActionController::Base
       token: '86f13a0f77fc65a43feef10900c5a721',
       task_id:  task_id
     }
-    Net::HTTP.post_form(uri, parameters) 
+    Net::HTTP.post_form(uri, parameters)
+    Rails.logger.debug "!!!!!DEBUG: send_answer"
+    Rails.logger.debug "!!!!!DEBUG: #{parameters}"
   end
 
   def first_task
