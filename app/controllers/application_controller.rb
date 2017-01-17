@@ -10,29 +10,11 @@ class ApplicationController < ActionController::Base
     question = question_params[:question]
     task_id = question_params[:id]
     level = question_params[:level]
-
-    question.gsub!('«', ' ')
-    question.gsub!('»', ' ')
-    question.gsub!('—', ' ')
-
-    question.gsub!(';', ' ')
-    question.gsub!(':', ' ')
-    question.gsub!(',', ' ')
-    question.gsub!('?', ' ')
-    question.gsub!('!', ' ')
-    question.gsub!('-', ' ')
-    question.gsub!('.', ' ')
-    question.gsub!('  ', ' ')
-    question.gsub!(/\A\p{Space}*/, '')
-    question.strip!
-    
-    
-
-
-    answer = $main_hash[question]
-    Rails.logger.debug "!!!!!DEBUG: #{answer}"
-
-    send_answer(answer, task_id)
+    if level == 1
+      send_answer(first_task(question), task_id)
+    elsif level == 2
+      send_answer(second_task(question), task_id)
+    end
   end
 
   def question_params
@@ -51,9 +33,21 @@ class ApplicationController < ActionController::Base
     Rails.logger.debug "!!!!!DEBUG: #{parameters}"
   end
 
-  def first_task
-  
-    
+  def first_task(question)
+    question.gsub!("\u00a0", " ")
+    question.gsub!(/[.,\-!?;:—»«]/, ' ') 
+
+    question.gsub!('  ', ' ')
+    question.gsub!(/\A\p{Space}*/, '')
+    question.strip!
+
+    answer = $main_hash[question]
+    Rails.logger.debug "!!!!!DEBUG: #{answer}"
+    answer
+  end
+
+  def second_task
+
   end
 
   
