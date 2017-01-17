@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     question = question_params[:question]
     task_id = question_params[:task_id]
     level = question_params[:level]
-    answer = $main_hash[question]r
+    answer = $main_hash[question]
 
     head :ok, content_type: 'text/html'
 
