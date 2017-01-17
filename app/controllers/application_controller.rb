@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
     level = question_params[:level]
     answer = $main_hash[question]
 
+    question.gsub!(',', ' ')
+    question.gsub!('.', ' ')
+    question.gsub!('  ', ' ')
+    question.strip!
     
 
     Rails.logger.debug "!!!!!DEBUG: #{params}"
