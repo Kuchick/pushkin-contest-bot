@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
     level = question_params[:level]
     answer = $main_hash[question]
 
-
+    head :ok, content_type: 'text/html'
+    
     send_answer(answer, task_id)
   end
 
