@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
     question.gsub!(',', ' ')
     question.gsub!('.', ' ')
     question.gsub!('  ', ' ')
+    question.gsub!(/\A\p{Space}*/, '')
     question.strip!
     
 

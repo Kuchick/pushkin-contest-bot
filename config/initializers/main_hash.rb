@@ -8,6 +8,7 @@ raw_hash.each do |arr|
   	string_of_poem.gsub!(',', ' ')
   	string_of_poem.gsub!('.', ' ')
   	string_of_poem.gsub!('  ', ' ')
+  	string_of_poem.gsub!(/\A\p{Space}*/, '')
   	string_of_poem.strip!
     $main_hash[string_of_poem] = arr[0]
   end
