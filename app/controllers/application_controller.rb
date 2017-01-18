@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
       send_answer(second_task(question), task_id)
     elsif level == 3
       send_answer(third_task(question), task_id)
+    elsif level == 4
+      send_answer(fourth_task(question), task_id)
+    elsif level == 5
+      send_answer(fifth_task(question), task_id)
     end
   end
 
@@ -52,9 +56,20 @@ class ApplicationController < ActionController::Base
     first_part, second_part = question.split("\n")
     answer = $super_hash[clearing_question(first_part)] +
      ',' +  $super_hash[clearing_question(second_part)]
-    #Rails.logger.debug "!!!!!DEBUG: #{answer}"
     answer
   end
+
+  def fourth_task(question)
+    first_part, second_part, third_part = question.split("\n")
+    answer = $super_hash[clearing_question(first_part)] +
+     ',' +  $super_hash[clearing_question(second_part)] + 
+     ',' + $super_hash[clearing_question(third_part)]
+    answer
+  end
+
+  def fifth_task(question)
+  end
+
 
   def clearing_question(question)
     question.gsub!("\u00a0", " ")
