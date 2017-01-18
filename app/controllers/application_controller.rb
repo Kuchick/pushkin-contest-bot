@@ -46,8 +46,17 @@ class ApplicationController < ActionController::Base
     answer
   end
 
-  def second_task
+  def second_task(question)
+    question.gsub!("\u00a0", " ")
+    question.gsub!(/[.,\-!?;:—»«]/, ' ') 
 
+    question.gsub!('  ', ' ')
+    question.gsub!(/\A\p{Space}*/, '')
+    question.strip!
+
+    answer = $super_hash[question]
+    Rails.logger.debug "!!!!!DEBUG: #{answer}"
+    answer
   end
 
   
