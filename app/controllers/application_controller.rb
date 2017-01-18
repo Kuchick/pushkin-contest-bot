@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
       send_answer(first_task(question), task_id)
     elsif level == 2
       send_answer(second_task(question), task_id)
+    elsif level == 3
+      send_answer(third_task(question), task_id)
     end
   end
 
@@ -34,29 +36,37 @@ class ApplicationController < ActionController::Base
   end
 
   def first_task(question)
-    question.gsub!("\u00a0", " ")
-    question.gsub!(/[.,\-!?;:—»«]/, ' ') 
-
-    question.gsub!('  ', ' ')
-    question.gsub!(/\A\p{Space}*/, '')
-    question.strip!
-
-    answer = $main_hash[question]
+    answer = $main_hash[clearing_question(question)]
     Rails.logger.debug "!!!!!DEBUG: #{answer}"
     answer
   end
 
   def second_task(question)
+    answer = $super_hash[clearing_question(question)]
+    Rails.logger.debug "!!!!!DEBUG: #{answer}"
+    answer
+  end
+
+  def third_task(question)
+    first_part, second_part = question.split("\n")
+    answer = $super_hash[clearing_question(first_part)] +
+     ',' +  $super_hash[clearing_question(second_part)]
+    Rails.logger.debug "!!!!!DEBUG: #{answer}"
+    answer
+  end
+
+
+
+
+
+
+  def clearing_question(question)
     question.gsub!("\u00a0", " ")
     question.gsub!(/[.,\-!?;:—»«]/, ' ') 
 
     question.gsub!('  ', ' ')
     question.gsub!(/\A\p{Space}*/, '')
     question.strip!
-
-    answer = $super_hash[question]
-    Rails.logger.debug "!!!!!DEBUG: #{answer}"
-    answer
   end
 
   
