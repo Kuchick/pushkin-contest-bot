@@ -68,6 +68,28 @@ class ApplicationController < ActionController::Base
   end
 
   def fifth_task(question)
+    question = clearing_question(question)
+    array = question.split(' ')
+    combinations = []
+    0.upto(array.size - 1) do |i|
+      array_with_word = question.split(' ')
+      array_with_word[i] = "%WORD%"
+      combinations << (array_with_word.join(" "))
+    end
+    array_with_nil_and_answer = []
+    combinations.each do |elem|
+      array_with_nil_and_answer << $super_hash[elem]
+    end
+
+    position = 0
+    answer = nil
+      0.upto(array_with_nil_and_answer.size - 1) do |i|
+      if !array_with_nil_and_answer[i].nil?
+        position += i
+        answer = array_with_nil_and_answer[i]
+      end
+    end
+    answer + ',' + array[position]
   end
 
 
