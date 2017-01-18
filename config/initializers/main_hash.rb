@@ -7,16 +7,6 @@ $main_hash = {}
 raw_hash.each do |arr|
   arr[1].each do |string_of_poem|
     string_of_poem.gsub!("\u00a0", " ")
-    # string_of_poem.gsub!('«', ' ')
-   #  string_of_poem.gsub!('»', ' ')
-   #  string_of_poem.gsub!('—', ' ')
-    # string_of_poem.gsub!(';', ' ')
-   #  string_of_poem.gsub!(':', ' ')
-    # string_of_poem.gsub!(',', ' ')
-    # string_of_poem.gsub!('?', ' ')
-    # string_of_poem.gsub!('!', ' ')
-    # string_of_poem.gsub!('-', ' ')
-    # string_of_poem.gsub!('.', ' ')
     string_of_poem.gsub!(/[.,\-!?;:—»«]/, ' ')
     string_of_poem.gsub!('  ', ' ')
     string_of_poem.gsub!(/\A\p{Space}*/, '')

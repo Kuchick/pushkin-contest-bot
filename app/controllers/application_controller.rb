@@ -30,20 +30,21 @@ class ApplicationController < ActionController::Base
       token: '86f13a0f77fc65a43feef10900c5a721',
       task_id:  task_id
     }
-    Net::HTTP.post_form(uri, parameters)
+    responce = Net::HTTP.post_form(uri, parameters)
+    Rails.logger.debug "\n\n\n!!!!!DEBUG: #{responce}"
     Rails.logger.debug "!!!!!DEBUG: send_answer"
     Rails.logger.debug "!!!!!DEBUG: #{parameters}"
   end
 
   def first_task(question)
     answer = $main_hash[clearing_question(question)]
-    Rails.logger.debug "!!!!!DEBUG: #{answer}"
+    #Rails.logger.debug "!!!!!DEBUG: #{answer}"
     answer
   end
 
   def second_task(question)
     answer = $super_hash[clearing_question(question)]
-    Rails.logger.debug "!!!!!DEBUG: #{answer}"
+    #Rails.logger.debug "!!!!!DEBUG: #{answer}"
     answer
   end
 
@@ -51,14 +52,9 @@ class ApplicationController < ActionController::Base
     first_part, second_part = question.split("\n")
     answer = $super_hash[clearing_question(first_part)] +
      ',' +  $super_hash[clearing_question(second_part)]
-    Rails.logger.debug "!!!!!DEBUG: #{answer}"
+    #Rails.logger.debug "!!!!!DEBUG: #{answer}"
     answer
   end
-
-
-
-
-
 
   def clearing_question(question)
     question.gsub!("\u00a0", " ")
@@ -67,6 +63,7 @@ class ApplicationController < ActionController::Base
     question.gsub!('  ', ' ')
     question.gsub!(/\A\p{Space}*/, '')
     question.strip!
+    question
   end
 
   
