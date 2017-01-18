@@ -29,7 +29,8 @@ $super_hash = {}
 $main_hash.keys.each do |key|
   0.upto(key.split(' ').size - 1) do |i|
     temp = key.split(' ')
+    changed_word = temp[i]
     temp[i] = "%WORD%"
-    $super_hash[temp.join(' ')] = $main_hash[key] 
+    $super_hash[temp.join(' ')] = changed_word 
   end
 end
